@@ -3,7 +3,7 @@ import { Chart } from 'chart.js/auto' // A complete build of chart.js - not advi
 import { csvParse } from 'd3' // A single exported module from d3 for reading csv files
 
 async function loadAndChartData() {
-  const response = await fetch('data/police_shootings.csv')
+  const response = await fetch('data/police_shootings_wide.csv')
 	const csvText = await response.text()
 	const data = csvParse(csvText)
 	
@@ -19,29 +19,38 @@ async function loadAndChartData() {
       data: {
         labels: data.map(d => d.Year),
 				datasets: [{
-					label: 'Total Fatal Police Shootings',
+					label: 'Fatal police shootings in the U.S.',
 					data: data.map(d => d['Fatal police shootings (US)']),
 					borderColor: 'red',
-					fill: false
-				}]
+					fill: true
+				},
+				{
+					label: 'Fatal police shootings in Canada',
+					data: data.map(d => d['Fatal police shootings (Canada)']),
+					borderColor: 'blue',
+					fill: true
+				}],
       },
 			options: {
 				plugins: { // how we access our legend
                     title: {
-                        text: 'Fatal Police Shootings in the US (2015-2021)',
+                        text: 'Fatal Police Shootings in the U.S. vs. Canada (2015-2021)',
                         display: true,
                         position: 'top',
                         align: 'start',
                         font: {
                             size: 35,
+							family: 'PT Sans',
                             weight: 'bold'
                         }
                     },
                     subtitle: {
                         text: 'Despite increased awareness and calls for reform, the annual number of fatal police shootings in the U.S. has risen since 2016, nearly reaching 1,100 in 2022',
                         display: true,
+						align: 'start',
                         font: {
                             size: 20,
+							family: 'PT Sans',
                             weight: 'bold'
                         },
                         padding: {
@@ -52,9 +61,10 @@ async function loadAndChartData() {
 					legend: {
                         position: 'bottom',
 						labels: {
-							font: { // bigger font for legend
-								size: 24,
-								weight: 'bold'
+							font: {
+								size: 20,
+								family: 'PT Sans',
+								weight: 'normal'
 							}
 						}
 					}
