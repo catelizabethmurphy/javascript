@@ -38,3 +38,15 @@ a{color:var(--accent);}
   padding:20px;
   margin-bottom:20px;
 }
+
+.source {
+  font-family: 'PT Sans Caption', sans-serif;
+  text-align: right;
+  font-size: 1em;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+#source-bar-chart {
+  padding-bottom: 30px;
+}
